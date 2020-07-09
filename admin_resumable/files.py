@@ -43,6 +43,8 @@ class ResumableFile(object):
 
     @property
     def upload_to(self):
+        if callable(self.field.upload_to):
+            return self.field.upload_to(instance=self.field.model, filename=self.filename)
         return self.field.upload_to
 
     @property
